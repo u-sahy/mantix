@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/logo.jpg" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <title>Mantix Core Technologies</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      margin-left: 20px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .loader {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    .info {
+      display: flex;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      background: #008000;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+       background: #006600;
+    }
+
+    .button {
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 770px) {
+      .container {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      h1 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      margin-left: 20px;
+      letter-spacing: 1px;
+       }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="info">
+      <i class="bi bi-cone-striped" style="color: red; font-size: 40px; margin-top: 15px;"></i>
+    <h1>Site Under Development</h1></div>
+    <p>
+      We are currently working on building this site and adding new features.  
+      A few areas might not be fully ready yet, but everything is coming together nicely.  
+      Thank you for your patience while the development continues.
+    </p>
+    <!--<div class="loader"></div>-->
+    <div class="button">
+      <a href="contact.html" class="btn">Contact</a>
+    </div>
+  </div>
+
+</body>
+</html>
