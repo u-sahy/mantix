@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Email Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --blue-tint: #eff6ff;
+      --mid-blue: #dbeafe;
+      --text: #1e293b;
+      --subtext: #64748b;
+      --muted: #94a3b8;
+      --navy: #1a3a7c;
+      --vivid: #2563eb;
+      --bright: #3b82f6;
+      --border: #e2e8f2;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #dbeafe 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -20%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #eff6ff 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: 0 4px 6px rgba(37,99,235,0.04), 0 20px 60px rgba(26,58,124,0.1);
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.5s cubic-bezier(.22,.61,.36,1) both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-strip {
+      width: 48px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--navy), var(--vivid), var(--bright));
+      border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: var(--subtext);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      animation: fadeIn 0.4s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.05s; }
+    .form-group:nth-child(2) { animation-delay: 0.10s; }
+    .form-group:nth-child(3) { animation-delay: 0.15s; }
+    .form-group:nth-child(4) { animation-delay: 0.20s; }
+    .form-group:nth-child(5) { animation-delay: 0.25s; }
+    .form-group:nth-child(6) { animation-delay: 0.30s; }
+    .form-group:nth-child(7) { animation-delay: 0.35s; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.45rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--blue-tint);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      appearance: none;
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    input:focus, select:focus {
+      border-color: var(--vivid);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+    .select-wrapper::after {
+      content: '▾';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--vivid);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--vivid) 60%, var(--bright) 100%);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,0.45); }
+    .btn:hover::after { background: rgba(255,255,255,0.07); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .btn-text { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      z-index: 999;
+      transition: transform 0.35s cubic-bezier(.22,.61,.36,1), opacity 0.35s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    #toast.success { background: linear-gradient(135deg, #16a34a, #22c55e); }
+    #toast.error   { background: linear-gradient(135deg, #dc2626, #ef4444); }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-strip"></div>
+  <h1>Payment Record</h1>
+  <p class="subtitle">Fill in payment details — a confirmation will be emailed automatically.</p>
+
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" id="username" placeholder="e.g. mss0000" required />
+  </div>
+
+  <div class="form-group">
+    <label>Email Address</label>
+    <input type="email" id="email" placeholder="Registered email" required />
+  </div>
+
+  <div class="form-group">
+    <label>Select Plan</label>
+    <div class="select-wrapper">
+      <select id="plan">
+        <option value="Basic (LKR 799)">Basic (LKR 799)</option>
+        <option value="Standard (LKR 999)">Standard (LKR 999)</option>
+        <option value="Premium (LKR 1199)">Premium (LKR 1199)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label>Start Date</label>
+      <input type="date" id="startDate" required />
+    </div>
+    <div class="form-group">
+      <label>End Date</label>
+      <input type="date" id="endDate" required />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Received Amount</label>
+    <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" required />
+  </div>
+
+  <div class="form-group">
+    <label>Status</label>
+    <div class="select-wrapper">
+      <select id="status">
+        <option value="Success">Success</option>
+        <option value="Pending">Pending</option>
+        <option value="Failed">Failed</option>
+        <option value="Refunded">Refunded</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn" id="sendBtn" onclick="submitForm()">
+    <span class="btn-text">
+      <span class="spinner" id="spinner"></span>
+      <span id="btnLabel">Send</span>
+    </span>
+  </button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // Set default dates
+  const today = new Date();
+  const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  function fmt(d) { return d.toISOString().split('T')[0]; }
+  document.getElementById('startDate').value = fmt(firstDay);
+  document.getElementById('endDate').value = fmt(lastDay);
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwECG5KbwmchkFaNxK8x2ziz_PHJ5ZzCMu0B2AxfDDf36EkpfIjYBekt0LZPhZz_CJ-A/exec';
+
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'show ' + type;
+    setTimeout(() => { t.className = ''; }, 3500);
+  }
+
+  function setLoading(loading) {
+    const btn = document.getElementById('sendBtn');
+    const spinner = document.getElementById('spinner');
+    const label = document.getElementById('btnLabel');
+    btn.disabled = loading;
+    spinner.style.display = loading ? 'block' : 'none';
+    label.textContent = loading ? 'Sending…' : 'Send';
+  }
+
+  function submitForm() {
+    const username  = document.getElementById('username').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const plan      = document.getElementById('plan').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate   = document.getElementById('endDate').value;
+    const amount    = document.getElementById('amount').value;
+    const status    = document.getElementById('status').value;
+
+    if (!username || !email || !startDate || !endDate || !amount) {
+      showToast('Please fill in all fields.', 'error');
+      return;
+    }
+
+    setLoading(true);
+
+    const params = new URLSearchParams({
+      username, email, plan, startDate, endDate, amount, status
+    });
+
+    fetch(SCRIPT_URL + '?' + params.toString())
+      .then(r => r.json())
+      .then(data => {
+        setLoading(false);
+        if (data.result === 'success') {
+          showToast('✓ Payment recorded & email sent!', 'success');
+          document.getElementById('username').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('amount').value = '';
+        } else {
+          showToast('Error: ' + (data.error || 'Unknown error'), 'error');
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        showToast('Network error. Please try again.', 'error');
+      });
+  }
+</script>
+</body>
+</html>

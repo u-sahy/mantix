@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a3a7c, #3b82f6); /* Page background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffffff; /* Surface / card */
+            width: 350px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(30, 41, 59, 0.05); /* Subtle slate shadow */
+            border: 1px solid #e2e8f2; /* Border color */
+            text-align: center;
+        }
+
+        h2 {
+            color: #1a3a7c; /* Using the Dark Navy for the header */
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #64748b; /* Subtext */
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .email-link {
+            color: #2563eb; /* Vivid blue */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            /* Gradient using Dark Navy to Bright Blue */
+            background: linear-gradient(135deg, #1a3a7c, #3b82f6);
+            color: #ffffff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Forgot Password?</h2>
+        
+        <p>
+            If you have forgotten your password or are unable to log in, please send an email to 
+            <a href="mailto:unoitechy@gmail.com" class="email-link">unoitechy@gmail.com</a>.
+        </p>
+
+        <a href="mailto:unoitechy@gmail.com" class="btn">EMAIL US</a>
+    </br>
+    <a href="login.html" class="back-link" style="color: #2563eb; text-decoration: none; margin-top: 10px;">← Back to Login</a>
+    </div>
+
+</body>
+</html>
