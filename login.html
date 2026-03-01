@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Mantix_LK</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:         #f4f7fb;
+            --surface:    #ffffff;
+            --border:     #e2e8f2;
+            --blue-1:     #1a3a7c;
+            --blue-2:     #2563eb;
+            --blue-3:     #3b82f6;
+            --blue-light: #eff6ff;
+            --blue-mid:   #dbeafe;
+            --text:       #1e293b;
+            --text-sub:   #64748b;
+            --text-muted: #94a3b8;
+            --gradient:   linear-gradient(135deg, #1a3a7c 0%, #2563eb 100%);
+            --shadow-md:  0 4px 16px rgba(26,58,124,0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 44px 40px 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            border: 1.5px solid var(--border);
+        }
+        .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .logo-icon {
+            width: 58px; height: 58px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 20px rgba(37,99,235,0.3);
+        }
+        .logo-icon svg { width: 28px; height: 28px; fill: white; }
+        .logo-wrap h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--blue-1);
+            margin-bottom: 4px;
+        }
+        .logo-wrap p { font-size: 0.85rem; color: var(--text-muted); }
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            transition: all 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--blue-3);
+            background: var(--surface);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 13px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            margin-top: 6px;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .error-box {
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            color: #dc2626;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            margin-top: 14px;
+            display: none;
+            text-align: center;
+        }
+        .links { margin-top: 20px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+        .links a {
+            font-size: 0.83rem;
+            color: var(--blue-2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .links a:hover { color: var(--blue-1); text-decoration: underline; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1.5px solid var(--border);
+        }
+        .footer .brand { font-size: 1rem; font-weight: 700; color: var(--blue-1); margin-bottom: 4px; }
+        .footer p { font-size: 0.78rem; color: var(--text-muted); }
+        .footer a { color: var(--blue-2); text-decoration: none; }
+        .spinner-sm {
+            width: 18px; height: 18px;
+            border: 2.5px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="logo-wrap">
+        <div class="logo-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        </div>
+        <h1>Expense Tracker</h1>
+        <p>Sign in to your account</p>
+    </div>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-login" id="loginBtn">
+            <span id="btnText">Sign In</span>
+            <div class="spinner-sm" id="spinner"></div>
+        </button>
+        <div class="links">
+            <a href="set-id.html" target="_blank">Change password</a>
+            <a href="forgot-id.html" target="_blank">Forgot password</a>
+        </div>
+        <div class="error-box" id="errorBox">Invalid username or password.</div>
+    </form>
+
+    <div class="footer">
+        <div class="brand">Mantix_LK</div>
+        <p>CONTACT: <a href="mailto:unoitechy@gmail.com">unoitechy@gmail.com</a></p>
+    </div>
+</div>
+
+<script>
+    const GS_LOGIN_URL = "https://script.google.com/macros/s/AKfycbzYpC4HDaDxIW8nj0A4epKr6CRkeskWnXsnZXDbsHQs0CrIWzx5AXkgQdFAK28cvX1n/exec";
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const errorBox = document.getElementById('errorBox');
+        const loginBtn = document.getElementById('loginBtn');
+        const spinner  = document.getElementById('spinner');
+        const btnText  = document.getElementById('btnText');
+
+        errorBox.style.display = 'none';
+        loginBtn.disabled = true;
+        spinner.style.display = 'block';
+        btnText.textContent = 'Signing in…';
+
+        try {
+            const params = new URLSearchParams({ op: 'login', username, password });
+            const res  = await fetch(GS_LOGIN_URL + '?' + params.toString());
+            const data = await res.json();
+
+            if (data.result === 'success') {
+                window.location.href = data.link;
+            } else {
+                errorBox.textContent = data.error || 'Invalid username or password.';
+                errorBox.style.display = 'block';
+            }
+        } catch (err) {
+            errorBox.textContent = 'Connection error. Please try again.';
+            errorBox.style.display = 'block';
+        } finally {
+            loginBtn.disabled = false;
+            spinner.style.display = 'none';
+            btnText.textContent = 'Sign In';
+        }
+    });
+</script>
+</body>
+</html>
